@@ -1,11 +1,23 @@
-function mbWildRide () {
-  const rides = [1, 2, 3, 4, 5, 6, 7];
-  let rideIndex = 1;
-  let ride = rides[0];
-  for(let i=1, i<=7, i++) {
-    rideIndex = i;
-    alert(ride[rideIndex]);
-  }
+const slider = document.querySelector('.slider');
+const slides = document.querySelectorAll('.slide');
+
+// Size parameters for pictures.
+const width = 130;
+const count = 3;
+
+let position = 0;
+
+function cycleRight() {
+  position += width * count;
+  position = Math.min(position, 0);
+  slider.style.marginLeft = `${position}px`;
 }
 
-onPageLoad = mbWildRide;
+function cycleLeft() {
+  position -= width * count;
+  position = Math.max(position, -width * (slides.length - count));
+  slider.style.marginLeft = `${position}px`;
+}
+
+carousel.querySelector('.prev').onclick = cycleRight;
+carousel.querySelector('.next').onclick = cycleLeft;

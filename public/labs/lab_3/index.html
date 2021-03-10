@@ -4,17 +4,28 @@
 <!-- Make a carousel of four mochi images that cycle, based on the readings from javascript.info -->
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" charset="utf-8">
   <head>
     <title>Jonah Pool's Lab 3</title>
     <link rel="stylesheet" href="styles.css">
-    
   </head>
   
   <body>
-    <script src="script.js" charset="utf-8"></script>
-    <input class="previous"></div>
-    <input class="next"></div>
+    <div id="carousel" class="carousel">  
+      <input type="button" class="arrow prev" value=" < ">
+      <div class="gallery">
+        <ul class="slider">
+          <li class="slide"><img src="images/onigiri_1.png" alt="A cheery sesame onigiri."></li>
+          <li class="slide"><img src="images/onigiri_2.png" alt="A puppy-eyed onigiri."></li>
+          <li class="slide"><img src="images/onigiri_3.png" alt="A frustrated onigiri."></li>
+          <li class="slide"><img src="images/onigiri_4.png" alt="A blushing, smiling onigiri."></li>
+          <li class="slide"><img src="images/roll_1.png" alt="A cheery sushi roll."></li>
+          <li class="slide"><img src="images/roll_2.png" alt="A cheery sushi roll with several fillings."></li>
+          <li class="slide"><img src="images/roll_3.png" alt="A cheery sushi roll filled with magenta orbs."></li>
+        </ul>
+      </div>  
+      <input type="button" class="arrow next" value=" > ">
+    </div>
+    <script src="script.js"></script>
   </body>
-
 </html>
