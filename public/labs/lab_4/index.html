@@ -8,27 +8,27 @@
   <body>
     <h1>Jonah Pool's Lab 4</h1>
     <div class="container">
-      <form action="/api" method="POST">
+      <form action="/api" method="post">
         <ul class="flex-outer">
           <li>
-            <label for="first-name">First Name</label>
-            <input type="text" id="first-name" placeholder="Enter your first name here">
+            <label for="fname">First Name</label>
+            <input name="fname" type="text" id="fname" placeholder="Enter your first name here">
           </li>
           <li>
-            <label for="last-name">Last Name</label>
-            <input type="text" id="last-name" placeholder="Enter your last name here">
+            <label for="lname">Last Name</label>
+            <input name="lname" type="text" id="lname" placeholder="Enter your last name here">
           </li>
           <li>
             <label for="email">Email</label>
-            <input type="text" id="email" placeholder="Enter your email here">
+            <input name="email" type="email" id="email" placeholder="Enter your email here">
           </li>
           <li>
-            <label for="phone-number">Phone Number</label>
-            <input type="text" id="phone-number" placeholder="Enter your phone number here">
+            <label for="tel">Phone Number</label>
+            <input name="tel" type="tel" id="tel" placeholder="Enter your phone number here">
           </li>
           <li>
             <label for="message">Message</label>
-            <input type="text" id="message" placeholder="Enter your message here">
+            <textarea rows="5" cols="33" name="message" id="message" placeholder="Enter your message here"></textarea>
           </li>
           <li>
             <p>
@@ -36,33 +36,33 @@
             </p>
             <ul class="flex-inner">
               <li>
-                <input type="checkbox" id="twenty-to-twentynine">
+                <input name="twenty-to-twentynine" type="checkbox" id="twenty-to-twentynine">
                 <label for="twenty-to-twentynine">20-29</label>
               </li>
               <li>
-                <input type="checkbox" id="thirty-to-thirtynine">
+                <input name="thirty-to-thirtynine" type="checkbox" id="thirty-to-thirtynine">
                 <label for="thirty-to-thirtynine">30-39</label>
               </li>
               <li>
-                <input type="checkbox" id="fourty-to-fourtynine">
+                <input name="fourty-to-fourtynine" type="checkbox" id="fourty-to-fourtynine">
                 <label for="fourty-to-fourtynine">40-49</label>
               </li>
               <li>
-                <input type="checkbox" id="fifty-to-fiftynine">
+                <input name="fifty-to-fiftynine" type="checkbox" id="fifty-to-fiftynine">
                 <label for="fifty-to-fiftynine">50-59</label>
               </li>
               <li>
-                <input type="checkbox" id="sixty-to-sixtynine">
+                <input name="sixty-to-sixtynine" type="checkbox" id="sixty-to-sixtynine">
                 <label for="sixty-to-sixtynine">60-69</label>
               </li>
               <li>
-                <input type="checkbox" id="other">
+                <input name="other" type="checkbox" id="other">
                 <label for="other">Other</label>
               </li>
             </ul>
           </li>
           <li>
-            <button type="submit">Submit</button>
+            <button name="submit" id="submit" type="submit">Submit</button>
           </li>
         </ul>
       </form>
