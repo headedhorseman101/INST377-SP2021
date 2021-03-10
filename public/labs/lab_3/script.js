@@ -1,10 +1,13 @@
 const slider = document.querySelector('.slider');
 const slides = document.querySelectorAll('.slide');
 
-// Size parameters for pictures.
+slides.forEach((item) => {
+  const slide = item;
+  slide.style.position = 'relative';
+});
+
 const width = 130;
 const count = 3;
-
 let position = 0;
 
 function cycleRight() {
