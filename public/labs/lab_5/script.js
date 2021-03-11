@@ -78,7 +78,7 @@ async function dataHandler(mapObjectFromFunction) {
       // Add map markers to layer group.
       // This group will be added to the map later.
       const coords = place.geocoded_column_1.coordinates;
-      Console.log(coords);
+      console.log(coords);
       const marker = L.marker([coords[1], coords[0]]);
       marker.addTo(mapObjectFromFunction);
       markers.push(marker);
