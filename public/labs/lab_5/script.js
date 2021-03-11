@@ -73,11 +73,12 @@ async function dataHandler(mapObjectFromFunction) {
 
     evt.preventDefault();
     const matchArray = findMatches(restaurants);
-
+    let latLngArr = [];
     matchArray.forEach((place) => {
       // Add map markers to layer group.
       // This group will be added to the map later.
       const coords = place.geocoded_column_1.coordinates;
+      latLngArr.push(L.latLng(coords[1], coords[0], 0));
       console.log(coords);
       const marker = L.marker([coords[1], coords[0]]);
       marker.addTo(mapObjectFromFunction);
@@ -92,6 +93,23 @@ async function dataHandler(mapObjectFromFunction) {
       suggestions.append(newResult);
       console.log('List item added.');
     });
+
+    // Below code defines the amount of zoom on the map.
+    const distances = [];
+    const initialPoint = latLngArr[0];
+
+    // Populates the distances array with the distances from the first point.
+    latLngArr.forEach((point) => distances.push(point.distanceTo(initialPoint)));
+
+    // Creates a bounds object to set the zoom of the map according
+    // to the largest distance [in the distances array] from the initial point.
+    const zoomRadius = Math.max(...distances);
+    const zoomBounds = initialPoint.toBounds(zoomRadius * 2);
+
+    // Pan and zoom in according to bounds.
+    mapObjectFromFunction.panTo(initialPoint);
+    mapObjectFromFunction.fitBounds(zoomBounds);
+
     if (search.value.length === 0) {
       suggestions.innerHTML = '';
     }
