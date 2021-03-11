@@ -1,4 +1,4 @@
-const { over } = require("cypress/types/lodash");
+// const { over } = require("cypress/types/lodash");
 
 function mapInit() {
   // follow the Leaflet Getting Started tutorial here
