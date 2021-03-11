@@ -1,4 +1,4 @@
-// const { over } = require("cypress/types/lodash");
+const { over } = require("cypress/types/lodash");
 
 function mapInit() {
   // follow the Leaflet Getting Started tutorial here
@@ -17,68 +17,55 @@ function mapInit() {
 }
 
 async function dataHandler(mapObjectFromFunction) {
-  // use your assignment 1 data handling code here
-  // and target mapObjectFromFunction to attach markers
+  // Get the restauraunt data from the api.
   const request = await fetch('/api');
   const restaurants = await request.json();
 
-  let markers = [];
+  let markers = []; // Holds a list of all markers on the map. Empty on page load.
 
   const search = document.querySelector('.input');
   const form = document.getElementById('search');
   const suggestions = document.querySelector('.suggestions');
 
+  // Filter function for sorting through search results.
+  // Also handles duplicate results by excluding them.
+  // Returns the top five results.
   function findMatches(restList) {
     const tempArr = restList.filter((place) => place.zip.includes(search.value));
+    // Create a list of unique ids by making a set, then converting to an array.
+    // Useful for removing duplicate search results.
     const tempSet = new Set(tempArr.map((place) => place.establishment_id));
     const uniqueIDs = Array.from(tempSet);
 
-    // iterate through the list until out of unique "establishment_id"s
+    const results = [];
     let idLength = uniqueIDs.length - 1;
 
-    const results = [];
     function filterResults (place) {
-      // compare the value of the restaurants key to value in unique keys
+      // Compare the value of the restaurants key to value in uniqueIDs.
+      // Halts if no more uniqueIDs is empty.
       if (place.establishment_id === uniqueIDs[idLength] && uniqueIDs.length > 0) {
         results.push(place);
         uniqueIDs.pop();
         idLength = uniqueIDs.length - 1;
       }
     }
+    // Iterates through the list until out of unique establishment_id in uniqueIDs.
     while (idLength >= 0) {
       restList.forEach(filterResults);
     }
-    // Sort by reverse zip code
+    // Sorts by zip code in descending order.
     results.sort((a, b) => (b.zip - a.zip));
     return results.slice(0, 5);
   }
 
-  // const suggestions = document.querySelector('.suggestions');
-
-  // function displayMatches(event) {
-  //   const matchArray = findMatches(event.target.value, restaurants);
-  //   const html = matchArray.map((place) => {
-  //     entry = `
-  //     <div class="box">
-  //       <li>
-  //       <address>
-  //         <h2 class="subtitle is-3"><span class="name">${place.name}</span></h2>
-  //         <span class="address">${place.address_line_1}</span> <br>
-  //         ${place.city}, ${place.state} ${place.zip} <br>
-  //         <span class="category">${place.category} <br>
-  //       </address>
-  //       </li>
-  //     </div>
-  //     `;
-  //     return entry;
-  //   });
-  //   suggestions.innerHTML = html.join('');
-  // }
+  // Event handler called upon submission of the search bar form. Returns
+  // a list of of restaurants under the search bar and adds corresponding
+  // pins on the adjacent map.
   form.addEventListener('submit', async (evt) => {
     // Clear results list
     suggestions.innerHTML = '';
 
-    // Remove all old markers
+    // Removes all old markers from the map.
     markers.forEach((marker) => {
       mapObjectFromFunction.removeLayer(marker);
     });
@@ -88,15 +75,16 @@ async function dataHandler(mapObjectFromFunction) {
     const matchArray = findMatches(restaurants);
 
     matchArray.forEach((place) => {
-      // Add map markers to layer group. This group will be added to the map later.
+      // Add map markers to layer group.
+      // This group will be added to the map later.
       const coords = place.geocoded_column_1.coordinates;
-      console.log(coords);
+      Console.log(coords);
       const marker = L.marker([coords[1], coords[0]]);
       marker.addTo(mapObjectFromFunction);
       markers.push(marker);
       console.log('Marker added');
 
-      // Create a new list item
+      // Creates a new list item and displays it on the page.
       const newResult = document.createElement('li');
       newResult.classList.add('box');
       newResult.classList.add('list-item');
@@ -109,7 +97,12 @@ async function dataHandler(mapObjectFromFunction) {
     }
   });
 }
+
+// Called when the page is loaded. Initializes the map,
+// handles the search function, and handles any other
+// actions on the page.
 async function windowActions() {
+  console.log('page loaded');
   const map = mapInit();
   await dataHandler(map);
 }
