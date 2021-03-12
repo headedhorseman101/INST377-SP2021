@@ -2,7 +2,7 @@
 
 function mapInit() {
   // follow the Leaflet Getting Started tutorial here
-
+  console.log('Started map init.')
   // Show a progress bar while map loads
   const mapObj = document.getElementById('mapid');
   const mapBox = document.getElementById('map-box');
