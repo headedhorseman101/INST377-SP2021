@@ -128,7 +128,7 @@ async function dataHandler(mapObjectFromFunction) {
     // mapObjectFromFunction.panTo(initialPoint);
     mapObjectFromFunction.fitBounds(zoomBounds);
     submitButton.classList.toggle('is-loading');
-    const firstPopup = L.popup(className, markers[0]);
+    const firstPopup = L.popup(className = '', markers[0]);
     firstPopup
       .setLatLng(initialPoint)
       .setContent(`<p>${matchArray[0].name}</p>`)
