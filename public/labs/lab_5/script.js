@@ -127,8 +127,8 @@ async function dataHandler(mapObjectFromFunction) {
     // Pan and zoom in according to bounds.
     // mapObjectFromFunction.panTo(initialPoint);
     mapObjectFromFunction.fitBounds(zoomBounds);
-
-    const firstPopup = L.popup(className = 'tooltip', markers[0]);
+    submitButton.classList.toggle('is-loading');
+    const firstPopup = L.popup(className, markers[0]);
     firstPopup
       .setLatLng(initialPoint)
       .setContent(`<p>${matchArray[0].name}</p>`)
