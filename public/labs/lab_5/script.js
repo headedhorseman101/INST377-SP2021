@@ -2,7 +2,7 @@
 
 function mapInit() {
   // follow the Leaflet Getting Started tutorial here
-  console.log('Started map init.')
+  // console.log('Started map init.');
   // Show a progress bar while map loads
   const mapObj = document.getElementById('mapid');
   const mapBox = document.getElementById('map-box');
@@ -96,11 +96,11 @@ async function dataHandler(mapObjectFromFunction) {
       // This group will be added to the map later.
       const coords = place.geocoded_column_1.coordinates;
       latLngArr.push(L.latLng(coords[1], coords[0], 0));
-      console.log(coords);
+      // console.log(coords);
       const marker = L.marker([coords[1], coords[0]]);
       marker.addTo(mapObjectFromFunction);
       markers.push(marker);
-      console.log('Marker added');
+      // console.log('Marker added');
 
       // Creates a new list item and displays it on the page.
 
@@ -109,9 +109,9 @@ async function dataHandler(mapObjectFromFunction) {
       newResult.classList.add('list-item');
       newResult.innerHTML = `<div class='list-header'>${place.name}</div><address>${place.address_line_1}</address>`;
       suggestions.append(newResult);
-      console.log('List item added.');
+      // console.log('List item added.');
     });
-    console.log(submitButton.classList.toggle('is-loading')); 
+    // console.log(submitButton.classList.toggle('is-loading')); 
     // Below code defines the amount of zoom on the map.
     const distances = [];
     const initialPoint = latLngArr[0];
@@ -144,7 +144,7 @@ async function dataHandler(mapObjectFromFunction) {
 // handles the search function, and handles any other
 // actions on the page.
 async function windowActions() {
-  console.log('page loaded');
+  // console.log('page loaded');
   const map = mapInit();
   await dataHandler(map);
 }
