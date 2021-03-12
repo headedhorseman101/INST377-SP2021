@@ -2,7 +2,20 @@
 
 function mapInit() {
   // follow the Leaflet Getting Started tutorial here
-  document.getElementById('mapid').style.height = `${400}px`;
+
+  // Show a progress bar while map loads
+  const mapObj = document.getElementById('mapid');
+  const mapBox = document.getElementById('map-box');
+  mapObj.style.height = `${400}px`;
+  const elementAttributes = {
+    class: 'progress is-expanded is-large is-primary',
+    name: 'map-progress',
+    id: 'map-progress'
+  };
+  const progressBar = document.createElement('progress', elementAttributes);
+  mapBox.append(progressBar);
+
+  // Generate map and street map tile layer
   const map = L.map('mapid').setView([38.9896946148518, -76.93886260848691], 13);
 
   L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
@@ -13,6 +26,7 @@ function mapInit() {
     zoomOffset: -1,
     accessToken: 'pk.eyJ1IjoicG9vbDAxMSIsImEiOiJja20zdmVjZHAwYzl2MnBsY2R3MWdoemEyIn0.cdvnKCusaIY45GptcuQcPQ'
   }).addTo(map);
+  mapBox.removeChild(progressBar);
   return map;
 }
 
@@ -26,6 +40,7 @@ async function dataHandler(mapObjectFromFunction) {
   const search = document.querySelector('.input');
   const form = document.getElementById('search');
   const suggestions = document.querySelector('.suggestions');
+  const submitButton = document.getElementById('submit');
 
   // Filter function for sorting through search results.
   // Also handles duplicate results by excluding them.
@@ -62,6 +77,8 @@ async function dataHandler(mapObjectFromFunction) {
   // a list of of restaurants under the search bar and adds corresponding
   // pins on the adjacent map.
   form.addEventListener('submit', async (evt) => {
+    // Loading Button
+    
     // Clear results list
     suggestions.innerHTML = '';
 
@@ -70,10 +87,10 @@ async function dataHandler(mapObjectFromFunction) {
       mapObjectFromFunction.removeLayer(marker);
     });
     markers = [];
-
     evt.preventDefault();
+    submitButton.classList.toggle('is-loading');
     const matchArray = findMatches(restaurants);
-    let latLngArr = [];
+    const latLngArr = [];
     matchArray.forEach((place) => {
       // Add map markers to layer group.
       // This group will be added to the map later.
@@ -86,6 +103,7 @@ async function dataHandler(mapObjectFromFunction) {
       console.log('Marker added');
 
       // Creates a new list item and displays it on the page.
+
       const newResult = document.createElement('li');
       newResult.classList.add('box');
       newResult.classList.add('list-item');
@@ -93,7 +111,7 @@ async function dataHandler(mapObjectFromFunction) {
       suggestions.append(newResult);
       console.log('List item added.');
     });
-
+    console.log(submitButton.classList.toggle('is-loading')); 
     // Below code defines the amount of zoom on the map.
     const distances = [];
     const initialPoint = latLngArr[0];
@@ -101,14 +119,20 @@ async function dataHandler(mapObjectFromFunction) {
     // Populates the distances array with the distances from the first point.
     latLngArr.forEach((point) => distances.push(point.distanceTo(initialPoint)));
 
-    // Creates a bounds object to set the zoom of the map according
+    // Creates a latLngBounds object to set the zoom of the map according
     // to the largest distance [in the distances array] from the initial point.
     const zoomRadius = Math.max(...distances);
     const zoomBounds = initialPoint.toBounds(zoomRadius * 2);
 
     // Pan and zoom in according to bounds.
-    mapObjectFromFunction.panTo(initialPoint);
+    // mapObjectFromFunction.panTo(initialPoint);
     mapObjectFromFunction.fitBounds(zoomBounds);
+
+    const firstPopup = L.popup(className = 'tooltip', markers[0]);
+    firstPopup
+      .setLatLng(initialPoint)
+      .setContent(`<p>${matchArray[0].name}</p>`)
+      .openOn(mapObjectFromFunction);
 
     if (search.value.length === 0) {
       suggestions.innerHTML = '';

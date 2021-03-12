@@ -1,0 +1,23 @@
+body {
+    padding: 0 10px;
+}
+
+.container {
+    max-width: 1200px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.list-header {
+    font-weight: 800;
+    font-family: 'Helvetica';
+    
+}
+
+.list-item {
+    background:rgb(173, 37, 37);
+}
+
+.list-item, .list-header{
+    color: rgb(236, 236, 236);
+}
