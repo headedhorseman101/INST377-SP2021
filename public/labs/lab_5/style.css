@@ -1,0 +1,21 @@
+body {
+    padding: 0 10px;
+}
+
+h1 {
+    font-family: 'Helvetica';
+    font-weight: 800;
+}
+
+.list-header {
+    font-weight: 800;
+    font-family: 'Helvetica';
+}
+
+.list-item {
+    background:#00d1b2;
+}
+
+.list-item, .list-header{
+    color: rgb(245, 245, 245);
+}

@@ -11,6 +11,7 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" 
     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" 
     crossorigin=""></script>
+		<link rel="stylesheet" href="style.css">
   </head>
   <body>
     <div class="container is-max-desktop">
@@ -22,18 +23,20 @@
       		      Jonah Pool's Lab 5
 							</h1>
       		    <p class="subtitle">
-      		      Zip Search
+      		      Restaurant Zip Search
       		    </p>
       		  </div>
       		</section>
-				
-      		<form name="userSearch" id="search" class="field">
-      		  <div id="control" name="control" class="control">
-      		    <label for="searchbox"></label>
-							<input class="input" name="searchbox" id="searchbox" type="text" placeholder="Search by restaurant name, city, or category...">
-							<button type="submit" id="submit" name="submit" title="Submit">Submit</button>
+					<div class="block">	
+      		<form name="userSearch" id="search" class="field has-addons">
+      		  <div id="control" name="control" class="control is-expanded">
+							<input class="input" name="searchbox" id="searchbox" type="text" placeholder="Search restaurant by zip code">
       		  </div>
+						<div class="control">
+							<button type="submit" class="button is-primary is-outlined" id="submit" name="submit" title="Submit">Submit</button>
+						</div>
       		</form>
+					</div>
 				
       		<div id="suggestions-list" name="suggestions-list" class="suggestions-list"> 
       		  <ul id="suggestions" name="suggestions" class="suggestions">
@@ -41,8 +44,11 @@
       		  </ul>       
       		</div>
 				</div>
+				
 				<div class="column">
-					<div id="mapid"></div>
+					<div id="map-box" class="box">
+						<div id="mapid"></div>
+					</div>
 				</div>
 			</div>
     </div>
