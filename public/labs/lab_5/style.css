@@ -2,20 +2,13 @@ body {
     padding: 0 10px;
 }
 
-.container {
-    max-width: 1200px;
-    width: 80%;
-    margin: 0 auto;
-}
-
 .list-header {
     font-weight: 800;
     font-family: 'Helvetica';
-    
 }
 
 .list-item {
-    background:rgb(173, 37, 37);
+    background:#00d1b2;
 }
 
 .list-item, .list-header{

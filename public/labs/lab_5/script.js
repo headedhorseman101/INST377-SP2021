@@ -78,7 +78,7 @@ async function dataHandler(mapObjectFromFunction) {
   // pins on the adjacent map.
   form.addEventListener('submit', async (evt) => {
     // Loading Button
-    
+
     // Clear results list
     suggestions.innerHTML = '';
 
