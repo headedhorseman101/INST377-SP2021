@@ -111,7 +111,7 @@ async function dataHandler(mapObjectFromFunction) {
       suggestions.append(newResult);
       // console.log('List item added.');
     });
-    // console.log(submitButton.classList.toggle('is-loading')); 
+    // console.log(submitButton.classList.toggle('is-loading'));
     // Below code defines the amount of zoom on the map.
     const distances = [];
     const initialPoint = latLngArr[0];
